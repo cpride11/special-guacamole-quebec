@@ -12,15 +12,13 @@
 
 <h3> Create New Saw </h3>
 
-<form method="POST" action="/createSaw">
+<form method="POST" action="createSaw">
     <label for="sawName">Saw Name</label>
-        <input name="sawName" value="new saw">
-    <br>
-    <label for="size">size</label>
-      <input name="size" value="gallon"> 
-    <br>
-    <input type="submit" value="add a drink" />
+    <input name="sawName" placeholder="new saw name">
+    <input type="submit" value="create a new saw" />
 </form>
+
+
 
 
 <%- include('partials/html-end.ejs') %>

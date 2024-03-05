@@ -78,14 +78,15 @@ app.get('/', async (req, res) => {
   
     try {
       // console.log("req.body: ", req.body) 
+
       client.connect; 
       const collection = client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory");
       await collection.insertOne(req.body);
         
       res.redirect('/');
     }
-    catch(e){
-      console.log(error)
+    catch(err){
+      console.log(err)
     }
     finally{
      // client.close()
