@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // use res.render to load up an ejs view file
 
 //type in result from the enneagram test
-let myTypeServer = "The Investigator";
+//let myTypeServer = "The Investigator";
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -29,7 +29,7 @@ const client = new MongoClient(process.env.MONGO_URI, {
 });
 
 
-async function mongoConnect() {
+async function getChainsawData() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -37,7 +37,8 @@ async function mongoConnect() {
     // await client.db("admin").command({ ping: 1 });
     const result = await client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory").find().toArray();
 
-    console.log("mongoConnect Result: ", result);
+    // f/n = function
+    console.log("mongo call await inside f/n: ", result);
 
     return result; 
 
@@ -48,34 +49,21 @@ async function mongoConnect() {
 }
 
 
-app.get('/read', async (req,res) => {
+app.get('/', async (req, res) => {
 
-  let myResultServer = await run(); 
+    let result = await getChainsawData(); 
 
-  console.log("myResultServer:", myResultServer);
+    console.log("getChainsawData() Result: ", result);
 
-  res.render('index', {
-    myTypeClient: myTypeServer,
-    myResultClient: myResultServer
+    res.render('index', {
 
-  });
-
-
-}); 
-run().catch(console.dir);
-
-
-// console.log(process.env.URI)
-
-app.get('/', function(req, res) {
-
-  res.render('index', {
-   
-    myTypeClient: myTypeServer 
-
-  });
+        pageTitle: "courtney's saws",
+     
+      chainsawData: result
   
-});
+    });
+    
+  });
 
 app.get('/name', (req,res) => {
 
@@ -99,6 +87,6 @@ app.get('/send', function (req, res) {
 })
 
 app.listen(port, () => {
-console.log(`papa app listening on port ${port}`)
+console.log(`courtney's saws (quebec) app listening on port ${port}`)
 })
 
