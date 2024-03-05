@@ -34,6 +34,7 @@ async function getChainsawData() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     const result = await client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory").find().toArray();
@@ -81,6 +82,10 @@ app.get('/', async (req, res) => {
 
       client.connect; 
       const collection = client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory");
+      
+      //draws from body parser
+      console.log(req.body);
+
       await collection.insertOne(req.body);
         
       res.redirect('/');
