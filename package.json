@@ -1,0 +1,29 @@
+{
+  "name": "special-guacamole-quebec",
+  "version": "1.0.0",
+  "description": "Cumbie Spring 24 Quebec",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cj89112/special-guacamole-quebec.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cj89112/special-guacamole-quebec/issues"
+  },
+  "homepage": "https://github.com/cj89112/special-guacamole-quebec#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.3",
+    "mongodb": "^6.4.0",
+    "nodemon": "^3.1.0"
+  }
+}
