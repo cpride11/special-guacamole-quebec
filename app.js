@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 
 // set the view engine to ejs
 let path = require('path');
+const e = require('express');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -42,7 +43,13 @@ async function getChainsawData() {
 
     return result; 
 
- } finally {
+ } 
+ 
+    catch(err) {
+        console.log("getChainsawData() error: ", err);
+    }
+
+    finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
@@ -51,7 +58,7 @@ async function getChainsawData() {
 
 app.get('/', async (req, res) => {
 
-    let result = await getChainsawData(); 
+    let result = await getChainsawData().catch(console.error); 
 
     console.log("getChainsawData() Result: ", result);
 
@@ -65,6 +72,75 @@ app.get('/', async (req, res) => {
     
   });
 
+
+//create to mongo
+  app.post('/createSaw', async (req, res) => {
+  
+    try {
+      // console.log("req.body: ", req.body) 
+      client.connect; 
+      const collection = client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory");
+      await collection.insertOne(req.body);
+        
+      res.redirect('/');
+    }
+    catch(e){
+      console.log(error)
+    }
+    finally{
+     // client.close()
+    }
+  
+  })
+  
+
+  app.post('/updateDrink/:id', async (req, res) => {
+  
+    try {
+      console.log("req.parms.id: ", req.params.id) 
+      
+      client.connect; 
+      const collection = client.db("chillAppz").collection("drinkz");
+      let result = await collection.findOneAndUpdate( 
+        {"_id": ObjectId(req.params.id)}, { $set: {"size": "REALLY BIG DRINK" } }
+      )
+      .then(result => {
+        console.log(result); 
+        res.redirect('/');
+      })
+      .catch(error => console.error(error))
+    }
+    finally{
+      //client.close()
+    }
+  
+  })
+  
+  app.post('/deleteDrink/:id', async (req, res) => {
+  
+    try {
+      console.log("req.parms.id: ", req.params.id) 
+      
+      client.connect; 
+      const collection = client.db("chillAppz").collection("drinkz");
+      let result = await collection.findOneAndDelete( 
+        {
+          "_id": ObjectId(req.params.id)
+        }
+      )
+      .then(result => {
+        console.log(result); 
+        res.redirect('/');
+      })
+      .catch(error => console.error(error))
+    }
+    finally{
+      //client.close()
+    }
+  
+  })
+  
+
 app.get('/name', (req,res) => {
 
   console.log("in get to slash name:", req.query.ejsFormName); 
@@ -77,13 +153,6 @@ app.get('/name', (req,res) => {
   });
 
   
-})
-
-
-
-app.get('/send', function (req, res) {
-  
-    res.send('Hello World from Express <br><a href="/">home</a>')
 })
 
 app.listen(port, () => {
