@@ -14,13 +14,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-// use res.render to load up an ejs view file
-
-//type in result from the enneagram test
-//let myTypeServer = "The Investigator";
-
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.MONGO_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
