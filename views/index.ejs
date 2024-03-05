@@ -1,37 +1,26 @@
 <%- include('partials/html-start.ejs') %>
 
-<h1>Hello World from EJS.</h1>
+<h1>Welcome to Courtney's Chainsaw App</h1>
 
-<p>I\'m Courtney
+<p>I\'m Courtney Pride
 
-<p><%= myResultClient.length %></p>
-
-<% for (var i=0; i< myResultClient.length; i++ ) { %>
-
-    <li> <%= myResultClient[i].userName %> </li>
-
-<% } %> 
-
-<li>I be <%= myTypeClient %>, good at musicianship, bad at socializing </li>
-
+<p>
+    <%= chainsawData.length %>
 </p>
 
-<form method="get" action="/name">
-    <p>Tell us your name! Or something: </p>
-    <input type="text" name="ejsFormName" value=" <%=myTypeClient %> "> 
-    <input type="submit">
-  </form>
+//todo: display the contents of the chainsawData...not just the length.
 
+<h3> Create New Saw </h3>
 
-<footer>sent from a file on my node server
-
-    <a href="/send">send</a> |
-
-    <a href="https://github.com/cj89112/papa-snowcats/" target="_blank">Source Code</a>
-
-</footer>
-
-<button class="btn btn-primary">boostrap working?</button>
+<form method="POST" action="/createSaw">
+    <label for="sawName">Saw Name</label>
+        <input name="sawName" value="new saw">
+    <br>
+    <label for="size">size</label>
+      <input name="size" value="gallon"> 
+    <br>
+    <input type="submit" value="add a drink" />
+</form>
 
 
 <%- include('partials/html-end.ejs') %>
