@@ -2,10 +2,24 @@
 
 <h1>Welcome to Courtney's Chainsaw App</h1>
 
-<p>I\'m Courtney Pride
+<p>I'm Courtney Pride
 
 <p>
-    <%= chainsawData.length %>
+    <% for(i=0; i<chainsawData.length; i++){ %>
+
+        <form method="POST" action="/updateSaw/<%= chainsawData[i]._id %>">
+            
+            <label for="newSawName"><%= chainsawData[i].sawName %></label>
+            <input name="newSawName">
+            <input type="submit" value="update saw name">
+
+        </form>
+
+
+
+        
+
+    <% } %>
 </p>
 
 //todo: display the contents of the chainsawData...not just the length.

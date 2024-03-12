@@ -52,7 +52,7 @@ async function getChainsawData() {
 
     finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    //await client.close();
   }
 }
 
@@ -80,7 +80,7 @@ app.get('/', async (req, res) => {
     try {
       // console.log("req.body: ", req.body) 
 
-      client.connect; 
+      await client.connect; 
       const collection = client.db("courtneys-hobbies-quebec").collection("chainsaw-inventory");
       
       //draws from body parser
